@@ -39,10 +39,10 @@ class Main extends React.Component {
                     <Route path={"employees"} component={TabnerEmployees} >
                         <IndexRoute component={DefaultEmployee}/>
                     </Route>
-                    <Route path={"vendors"} component={TabnerVendors}>
+                    <Route path={"vendors"} component={TabnerVendors} >
                         <IndexRoute component={DefaultVendor}/>
                     </Route>
-                    <Route path={"clients"} component={TabnerClients}>
+                    <Route path={"clients"} component={TabnerClients} >
                         <IndexRoute component={DefaultClient}/>
                     </Route>
                 </Route>

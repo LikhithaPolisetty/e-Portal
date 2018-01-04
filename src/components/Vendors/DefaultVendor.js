@@ -2,8 +2,13 @@ import React from 'react';
 import {Component} from 'react';
 import axios from 'axios';
 import { browserHistory} from "react-router";
-import {login, logout, setDefaultVendor} from '../../actions/mainActions';
+import {login, logout, setDefaultEmployee, setDefaultVendor} from '../../actions/mainActions';
 import {connect} from "react-redux";
+import {DataTable} from 'primereact/components/datatable/DataTable';
+import {Column} from 'primereact/components/column/Column';
+require("primereact/resources/themes/omega/theme.css");
+require("primereact/resources/primereact.min.css");
+
 
 class DefaultVendor extends Component {
     constructor(){
@@ -21,11 +26,10 @@ class DefaultVendor extends Component {
 
             axios.get('http://localhost:8080/TabnerEmployeePayroll/defaulttabnervendor', config)
                 .then((response) => {
-                    console.log(response.data.response);
-
                     console.log('printinig default vendor');
                     console.log(response.data.response);
                     this.props.setDefaultVendor(response.data.response);
+
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -35,27 +39,25 @@ class DefaultVendor extends Component {
     }
     render() {
         return(
-
-            <div className="panel-group" id="accordion">
-                <div className="panel panel-default">
-                    <div className="panel-heading">
-                        <h4 className="panel-title">
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Vendor Details</a>
                         </h4>
                     </div>
-                    <div id="collapse1" className="panel-collapse collapse">
-                        <div className="panel-body">
-                            <h4>Identification Number: {this.props.main.defaultVendor.id_number}</h4>
-                            <h4>Name: {this.props.main.defaultVendor.name}</h4>
+                    <div id="collapse1" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <h4>Id Number: {this.props.main.defaultVendor.id_number}</h4>
+                            <h4> Name: {this.props.main.defaultVendor.name}</h4>
                             <h4>Registration State: {this.props.main.defaultVendor.reg_state}</h4>
                             <h4>Invoice Frequency: {this.props.main.defaultVendor.invoice_freq}</h4>
                             <h4>Payment Frequency: {this.props.main.defaultVendor.payment_freq}</h4>
-                            <h4>Address: {this.props.main.defaultVendor.address}</h4>
                         </div>
                     </div>
                 </div>
-
             </div>
+
 
         );
     }
@@ -75,7 +77,7 @@ const mapDispatchToProps = (dispatch) => {
         logout: () => {
             dispatch(logout());
         },
-        setDefaultVendor: (vendor) => {
+        setDefaultVendor: (vendor) =>{
             dispatch(setDefaultVendor(vendor));
         }
     };

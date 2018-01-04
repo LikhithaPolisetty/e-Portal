@@ -7,7 +7,7 @@ const mainReducer = (state = {
     defaultVendor: '',
     tabnerVendors: [],
     defaultClient: '',
-    tabnerClients: []
+    tabnerClients: [],
 }, action) => {
     switch (action.type) {
         case "LOGIN":
@@ -56,7 +56,8 @@ const mainReducer = (state = {
             state = {
                 ...state,
                 defaultVendor: action.payload
-            }
+            };
+            break;
         case "TABNER_CLIENTS":
             state = {
                 ...state,
@@ -67,7 +68,8 @@ const mainReducer = (state = {
             state = {
                 ...state,
                 defaultClient: action.payload
-            }
+            };
+            break;
     }
     return state;
 };
