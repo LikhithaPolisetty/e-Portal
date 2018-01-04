@@ -43,3 +43,36 @@ export function setDefaultEmployee(employee) {
     };
 
 }
+
+export function setTabnerVendors(vendors) {
+    return {
+        type: "TABNER_VENDORS",
+        payload: vendors
+    };
+
+}
+
+export function setDefaultVendor(vendor) {
+    return {
+        type: "DEFAULT_VENDOR",
+        payload: vendor
+    };
+
+}
+
+
+export function setTabnerClients(clients) {
+    return {
+        type: "TABNER_CLIENTS",
+        payload: clients
+    };
+
+}
+
+export function setDefaultClient(client) {
+    return {
+        type: "DEFAULT_CLIENT",
+        payload: client
+    };
+
+}

@@ -3,7 +3,11 @@ const mainReducer = (state = {
     userName : '',
     check: '',
     defaultEmployee: '',
-    tabnerEmployees: []
+    tabnerEmployees: [],
+    defaultVendor: '',
+    tabnerVendors: [],
+    defaultClient: '',
+    tabnerClients: [],
 }, action) => {
     switch (action.type) {
         case "LOGIN":
@@ -40,6 +44,30 @@ const mainReducer = (state = {
             state = {
                 ...state,
                 defaultEmployee: action.payload
+            };
+            break;
+        case "TABNER_VENDORS":
+            state = {
+                ...state,
+                tabnerVendors: action.payload
+            };
+            break;
+        case "DEFAULT_VENDOR":
+            state = {
+                ...state,
+                defaultVendor: action.payload
+            };
+            break;
+        case "TABNER_CLIENTS":
+            state = {
+                ...state,
+                tabnerClients: action.payload
+            };
+            break;
+        case "DEFAULT_CLIENT":
+            state = {
+                ...state,
+                defaultClient: action.payload
             };
             break;
     }

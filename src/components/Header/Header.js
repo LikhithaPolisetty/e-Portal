@@ -164,6 +164,8 @@ class Header extends Component {
                     <a><Link to={"/loggedIn"} >Payrolls</Link></a><span className="pipe-class">|</span>
                     <a><Link to={"/rates"} >Rates</Link></a><span className="pipe-class">|</span>
                     <a><Link to={"/employees"} >Employees</Link></a><span className="pipe-class">|</span>
+                    <a><Link to={"/vendors"} >Vendors</Link></a><span className="pipe-class">|</span>
+                    <a><Link to={"/clients"} >Clients</Link></a><span className="pipe-class">|</span>
                 </div>
             </div>
             );
