@@ -160,12 +160,12 @@ class Header extends Component {
                     </nav>
                 </div>
                 <div className="test-nav">
-                    <a><Link to={"/home"} >Home</Link></a><span className="pipe-class">|</span>
-                    <a><Link to={"/loggedIn"} >Payrolls</Link></a><span className="pipe-class">|</span>
-                    <a><Link to={"/rates"} >Rates</Link></a><span className="pipe-class">|</span>
-                    <a><Link to={"/employees"} >Employees</Link></a><span className="pipe-class">|</span>
-                    <a><Link to={"/vendors"} >Vendors</Link></a><span className="pipe-class">|</span>
-                    <a><Link to={"/clients"} >Clients</Link></a><span className="pipe-class">|</span>
+                    <a ><Link to={"/home"} activeStyle={{color: 'red'}}>Home</Link></a><span className="pipe-class">|</span>
+                    <a style={{display: 'none'}}><Link to={"/loggedIn"} activeStyle={{color: 'red'}}>Payrolls</Link></a><span style={{display: 'none'}} className="pipe-class">|</span>
+                    <a style={{display: 'none'}}><Link to={"/rates"} activeStyle={{color: 'red'}}>Rates</Link></a><span style={{display: 'none'}} className="pipe-class">|</span>
+                    <a><Link to={"/employees"} activeStyle={{color: 'red'}}>Employees</Link></a><span className="pipe-class">|</span>
+                    <a><Link to={"/vendors"} activeStyle={{color: 'red'}}>Vendors</Link></a><span className="pipe-class">|</span>
+                    <a><Link to={"/clients"} activeStyle={{color: 'red'}}>Clients</Link></a><span className="pipe-class">|</span>
                 </div>
             </div>
             );
