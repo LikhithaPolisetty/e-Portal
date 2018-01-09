@@ -75,7 +75,7 @@ class Clients extends Component {
         var config = {
             headers: {'tabner_token': localStorage.getItem('tabner_token')}
         };
-        axios.post('http://localhost:8090/TabnerEmployeePayroll/newclient', {
+        axios.post('http://'+localStorage.getItem('your_ip')+':8090/TabnerEmployeePayroll/newclient', {
             idclient: this.state.idclient,
             clientname : this.state.clientname,
             phone : this.state.phone,
@@ -118,7 +118,7 @@ class Clients extends Component {
             var config = {
                 headers: {'tabner_token': localStorage.getItem('tabner_token')}
             };
-            axios.post('http://localhost:8090/TabnerEmployeePayroll/deleteclient', {
+            axios.post('http://'+localStorage.getItem('your_ip')+':8090/TabnerEmployeePayroll/deleteclient', {
                 idclient: this.props.main.tabnerClients[index].idclient
             }, config)
                 .then((response) => this.ifGotResponseFromDeleteClient(response, index))

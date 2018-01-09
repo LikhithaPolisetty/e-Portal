@@ -46,7 +46,7 @@ class Vendors extends Component {
             var config = {
                 headers: {'tabner_token': localStorage.getItem('tabner_token')}
             };
-            axios.get('http://localhost:8090/TabnerEmployeePayroll/tabnervendors', config)
+            axios.get('http://'+localStorage.getItem('your_ip')+':8090/TabnerEmployeePayroll/tabnervendors', config)
                 .then((response) => {
                     this.props.setTabnerVendors(response.data.response);
                     console.log(response);
@@ -68,7 +68,7 @@ class Vendors extends Component {
         var config = {
             headers: {'tabner_token': localStorage.getItem('tabner_token')}
         };
-        axios.post('http://localhost:8090/TabnerEmployeePayroll/newvendor', {
+        axios.post('http://'+localStorage.getItem('your_ip')+':8090/TabnerEmployeePayroll/newvendor', {
             id_number: this.state.id_number,
             name : this.state.name,
             reg_state : this.state.reg_state,
@@ -108,7 +108,7 @@ class Vendors extends Component {
             var config = {
                 headers: {'tabner_token': localStorage.getItem('tabner_token')}
             };
-            axios.post('http://localhost:8090/TabnerEmployeePayroll/deletevendor', {
+            axios.post('http://'+localStorage.getItem('your_ip')+':8090/TabnerEmployeePayroll/deletevendor', {
                 id_number: this.props.main.tabnerVendors[index].id_number
             }, config)
                 .then((response) => this.ifGotResponseFromDeleteVendor(response, index))
