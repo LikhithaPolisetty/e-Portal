@@ -18,6 +18,7 @@ class Rates extends Component {
             rates: '',
         };
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.onEdit = this.onEdit.bind(this);
     }
     handleInputChange(event) {
         const target = event.target;
@@ -51,6 +52,10 @@ class Rates extends Component {
 
     }
 
+    onEdit(index){
+        console.log('index is........'+index);
+    }
+
     render() {
 
         const employee_rates = this.props.main.employeeRates.map((emprate, index) => {
@@ -64,6 +69,7 @@ class Rates extends Component {
                     <td>{emprate.end_date}</td>
                     <td>{emprate.pay_rate}</td>
                     <td>{emprate.bill_rate}</td>
+                    <td><span className="glyphicon glyphicon-edit" onClick={ () => this.onEdit(index)}></span> </td>
                 </tr>
             } else {
                 if((emprate.first_name.indexOf(this.state.rates) > -1) || (emprate.last_name.toUpperCase().indexOf(this.state.rates) > -1)){
@@ -76,7 +82,7 @@ class Rates extends Component {
                         <td>{emprate.end_date}</td>
                         <td>{emprate.pay_rate}</td>
                         <td>{emprate.bill_rate}</td>
-
+                        <td><span className="glyphicon glyphicon-edit" onClick={ () => this.onEdit(index)}></span> </td>
                     </tr>
                 } else {
                     return   <tr className="employee_hover" key={index} style={{display: 'none'}}>
@@ -88,6 +94,7 @@ class Rates extends Component {
                         <td>{emprate.end_date}</td>
                         <td>{emprate.pay_rate}</td>
                         <td>{emprate.bill_rate}</td>
+                        <td><span className="glyphicon glyphicon-edit" onClick={ () => this.onEdit(index)}></span> </td>
                     </tr>
                 }
             }
@@ -95,7 +102,7 @@ class Rates extends Component {
         });
 
         return (
-            <div className="container-fluid">
+            <div className="container">
 
                 <div className="search-div" style={{paddingLeft:'27px', paddingRight: '31px', marginLeft:'0px', marginRight: '0px'}}>
                     <div className="col-xs-1" style={{paddingLeft:'0px'}}>
@@ -108,7 +115,7 @@ class Rates extends Component {
 
                 </div>
 
-                <div className="container">
+                <div>
 
                     <div className="table-div">
                         <div className="row justify-content-center">
