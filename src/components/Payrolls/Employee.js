@@ -38,7 +38,7 @@ class Employee extends Component {
             headers: {'tabner_token': localStorage.getItem('tabner_token')}
         };
 
-        axios.get('http://localhost:8080/TabnerEmployeePayroll/paydates', config)
+        axios.get('http://'+localStorage.getItem('your_ip')+':8090/TabnerEmployeePayroll/paydates', config)
             .then((response) => {
             console.log(response)
             this.setState({
@@ -67,7 +67,7 @@ class Employee extends Component {
         var config = {
             headers: {'tabner_token': localStorage.getItem('tabner_token')}
         };
-        axios.post('http://localhost:8080/TabnerEmployeePayroll/newuser', {
+        axios.post('http://'+localStorage.getItem('your_ip')+':8090/TabnerEmployeePayroll/newuser', {
             paycorId : this.state.paycorid,
             firstName : this.state.firstname,
             lastName: this.state.lastname,
@@ -105,7 +105,7 @@ class Employee extends Component {
         var config = {
             headers: {'tabner_token': localStorage.getItem('tabner_token')}
         };
-        axios.post('http://localhost:8080/TabnerEmployeePayroll/employees', {
+        axios.post('http://'+localStorage.getItem('your_ip')+':8090/TabnerEmployeePayroll/employees', {
             date : this.state.paydates[index]
         }, config)
             .then((response) => {
@@ -130,7 +130,7 @@ class Employee extends Component {
         });
 
         return(
-           <div>
+           <div style={{display: 'none'}}>
                <div className="dropdown">
                     <hr/>
                    <button className="btn btn-danger dropdown-toggle btn-align" type="button" data-toggle="dropdown" style={{backgroundColor : 'red'}} >Get Details

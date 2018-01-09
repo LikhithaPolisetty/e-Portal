@@ -22,17 +22,7 @@ import {connect} from "react-redux";
         return(
 
             <div>
-                <div className="dropdown">
-                    <hr/>
-                    <Link to={"/rates/payrates"} activeStyle={{color: 'red'}}> <button className="btn btn-primary dropdown-toggle btn-align"  type="button" >Pay Rates</button></Link>
-                    <Link to={"/rates/billrates"} > <button className="btn btn-primary dropdown-toggle btn-align"  type="button" >Bill Rates</button></Link>
 
-                </div>
-                <hr/>
-
-                <div >
-                    {this.props.children}
-                </div>
 
             </div>
         );
@@ -41,7 +31,6 @@ import {connect} from "react-redux";
 const mapStateToProps = (state) => {
     return {
         main: state.main
-
     };
 };
 

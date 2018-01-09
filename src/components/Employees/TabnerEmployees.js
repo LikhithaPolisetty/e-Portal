@@ -40,7 +40,7 @@ class TabnerEmployees extends Component {
                 headers: {'tabner_token': localStorage.getItem('tabner_token')}
             };
 
-            axios.get('http://localhost:8080/TabnerEmployeePayroll/tabneremployees', config)
+            axios.get('http://'+localStorage.getItem('your_ip')+':8090/TabnerEmployeePayroll/tabneremployees', config)
                 .then((response) => {
                     this.props.setTabnerEmployees(response.data.response);
                     console.log(response);
@@ -85,7 +85,7 @@ class TabnerEmployees extends Component {
         });
 
         return (
-            <div>
+            <div className="container-fluid">
 
                 <div>
                     <div className="row">

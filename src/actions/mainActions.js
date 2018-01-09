@@ -52,15 +52,6 @@ export function setTabnerVendors(vendors) {
 
 }
 
-export function setDefaultVendor(vendor) {
-    return {
-        type: "DEFAULT_VENDOR",
-        payload: vendor
-    };
-
-}
-
-
 export function setTabnerClients(clients) {
     return {
         type: "TABNER_CLIENTS",
@@ -68,11 +59,17 @@ export function setTabnerClients(clients) {
     };
 
 }
-
-export function setDefaultClient(client) {
+export function deleteClient(index) {
     return {
-        type: "DEFAULT_CLIENT",
-        payload: client
+        type: "DELETE_CLIENT",
+        payload: index
     };
 
+}
+
+export function deleteVendor(index) {
+    return {
+        type: "DELETE_VENDOR",
+        payload: index
+    };
 }

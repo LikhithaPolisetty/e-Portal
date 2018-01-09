@@ -24,7 +24,7 @@ class DefaultEmployee extends Component {
                 headers: {'tabner_token': localStorage.getItem('tabner_token')}
             };
 
-            axios.post('http://localhost:8080/TabnerEmployeePayroll/defaulttabneremployee', {
+            axios.post('http://'+localStorage.getItem('your_ip')+':8090/TabnerEmployeePayroll/defaulttabneremployee', {
                 username : this.props.main.userName
             }, config)
                 .then((response) => {

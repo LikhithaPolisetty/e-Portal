@@ -52,7 +52,7 @@ class Header extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        axios.post('http://localhost:8080/TabnerEmployeePayroll/login', {
+        axios.post('http://'+localStorage.getItem('your_ip')+':8090/TabnerEmployeePayroll/login', {
             username: this.state.email,
             password: this.state.password
         })
@@ -85,7 +85,7 @@ class Header extends Component {
         var config = {
             headers: {'tabner_token': localStorage.getItem('tabner_token')}
         };
-        axios.post('http://localhost:8080/TabnerEmployeePayroll/logout',{},config)
+        axios.post('http://'+localStorage.getItem('your_ip')+':8090/TabnerEmployeePayroll/logout',{},config)
             .then((response) => this.ifGotResponseFromLogout(response))
             .catch(function (error) {
                 console.log(error);
@@ -108,7 +108,7 @@ class Header extends Component {
 
     handleSignUp(event){
         event.preventDefault();
-        axios.post('http://localhost:8080/TabnerEmployeePayroll/signup', {
+        axios.post('http://'+localStorage.getItem('your_ip')+':8090/TabnerEmployeePayroll/signup', {
             username: this.state.email,
             password: this.state.password
         })
@@ -166,6 +166,8 @@ class Header extends Component {
                     <a><Link to={"/employees"} activeStyle={{color: 'red'}}>Employees</Link></a><span className="pipe-class">|</span>
                     <a><Link to={"/vendors"} activeStyle={{color: 'red'}}>Vendors</Link></a><span className="pipe-class">|</span>
                     <a><Link to={"/clients"} activeStyle={{color: 'red'}}>Clients</Link></a><span className="pipe-class">|</span>
+                    <a><Link to={"/rates"} activeStyle={{color: 'red'}}>Rates</Link></a><span className="pipe-class">|</span>
+                    <hr/>
                 </div>
             </div>
             );

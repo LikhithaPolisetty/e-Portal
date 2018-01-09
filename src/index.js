@@ -14,10 +14,8 @@ import Barcode from "./components/Otp/Barcode";
 import Totp from "./components/Otp/Totp";
 import TabnerEmployees from "./components/Employees/TabnerEmployees";
 import DefaultEmployee from "./components/Employees/DefaultEmployee";
-import TabnerVendors from "./components/Vendors/TabnerVendors";
-import DefaultVendor from "./components/Vendors/DefaultVendor";
-import TabnerClients from "./components/Clients/TabnerClients";
-import DefaultClient from "./components/Clients/DefaultClient";
+import Vendors from "./components/Vendors/Vendors";
+import Clients from "./components/Clients/Clients";
 
 require("./stylesheets/css/main.css");
 
@@ -33,17 +31,17 @@ class Main extends React.Component {
                     <Route path={"barcode"} component={Barcode} />
                     <Route path={"totp"} component={Totp} />
                     <Route path={"rates"} component={Rates} >
-                        <Route path={"payrates"} component={PayRates}  />
-                        <Route path={"billrates"} component={BillRates} />
+                       {/* <Route path={"payrates"} component={PayRates}  />
+                        <Route path={"billrates"} component={BillRates} />*/}
                     </Route>
                     <Route path={"employees"} component={TabnerEmployees} >
                         <IndexRoute component={DefaultEmployee}/>
                     </Route>
-                    <Route path={"vendors"} component={TabnerVendors} >
-                        <IndexRoute component={DefaultVendor}/>
+                    <Route path={"vendors"} component={Vendors} >
+
                     </Route>
-                    <Route path={"clients"} component={TabnerClients} >
-                        <IndexRoute component={DefaultClient}/>
+                    <Route path={"clients"} component={Clients} >
+
                     </Route>
                 </Route>
                 <Route path={"home-single"} component={Home}/>

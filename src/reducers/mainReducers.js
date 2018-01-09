@@ -4,9 +4,7 @@ const mainReducer = (state = {
     check: '',
     defaultEmployee: '',
     tabnerEmployees: [],
-    defaultVendor: '',
     tabnerVendors: [],
-    defaultClient: '',
     tabnerClients: [],
 }, action) => {
     switch (action.type) {
@@ -52,24 +50,29 @@ const mainReducer = (state = {
                 tabnerVendors: action.payload
             };
             break;
-        case "DEFAULT_VENDOR":
-            state = {
-                ...state,
-                defaultVendor: action.payload
-            };
-            break;
         case "TABNER_CLIENTS":
             state = {
                 ...state,
                 tabnerClients: action.payload
             };
             break;
-        case "DEFAULT_CLIENT":
+        case "DELETE_CLIENT":
+            var updatedClients = state.tabnerClients.slice();
+            updatedClients.splice(action.payload, 1);
             state = {
                 ...state,
-                defaultClient: action.payload
+                tabnerClients : updatedClients
             };
             break;
+        case "DELETE_VENDOR":
+            var updatedVendors = state.tabnerVendors.slice();
+            updatedVendors.splice(action.payload, 1);
+            state = {
+                ...state,
+                tabnerVendors: updatedVendors
+            };
+            break;
+
     }
     return state;
 };

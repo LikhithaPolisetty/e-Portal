@@ -14,7 +14,20 @@ var sectionStyle = {
 };
 
 
+
 class App extends Component {
+
+
+    componentDidMount(){
+        console.log('------printing address---------');
+        console.log(window.location.href);
+        var url = window.location.href;
+        var urls = url.split('http://');
+        console.log(urls);
+        var ip = urls[1].split(':')[0];
+        console.log('ip is' + ip);
+        localStorage.setItem('your_ip', ip);
+    }
 
     render() {
         return(
