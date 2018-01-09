@@ -26,7 +26,7 @@ export default class DisplayEmployee extends Component {
 
     render() {
         if (this.props.check == 'true') {
-            console.log('if lloop')
+            console.log('if loop')
 
             return (
 

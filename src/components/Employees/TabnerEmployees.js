@@ -67,8 +67,6 @@ class TabnerEmployees extends Component {
         this.props.setDefaultEmployee(this.props.main.tabnerEmployees[index]);
     }
 
-
-
     render() {
 
         const employees = this.props.main.tabnerEmployees.map((employee, index) => {

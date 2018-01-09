@@ -14,10 +14,10 @@ import Barcode from "./components/Otp/Barcode";
 import Totp from "./components/Otp/Totp";
 import TabnerEmployees from "./components/Employees/TabnerEmployees";
 import DefaultEmployee from "./components/Employees/DefaultEmployee";
-import TabnerVendors from "./components/Vendors/TabnerVendors";
-import DefaultVendor from "./components/Vendors/DefaultVendor";
-import TabnerClients from "./components/Clients/TabnerClients";
-import DefaultClient from "./components/Clients/DefaultClient";
+import Clients from "./components/ClientsComponents/Clients";
+import Vendors from "./components/VendorsComponents/Vendors";
+
+
 
 require("./stylesheets/css/main.css");
 
@@ -39,12 +39,8 @@ class Main extends React.Component {
                     <Route path={"employees"} component={TabnerEmployees} >
                         <IndexRoute component={DefaultEmployee}/>
                     </Route>
-                    <Route path={"vendors"} component={TabnerVendors} >
-                        <IndexRoute component={DefaultVendor}/>
-                    </Route>
-                    <Route path={"clients"} component={TabnerClients} >
-                        <IndexRoute component={DefaultClient}/>
-                    </Route>
+                    <Route path={"vendors"} component={Vendors} />
+                    <Route path={"clients"} component={Clients} />
                 </Route>
                 <Route path={"home-single"} component={Home}/>
             </Router>

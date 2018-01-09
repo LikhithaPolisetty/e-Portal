@@ -166,6 +166,8 @@ class Header extends Component {
                     <a><Link to={"/employees"} activeStyle={{color: 'red'}}>Employees</Link></a><span className="pipe-class">|</span>
                     <a><Link to={"/vendors"} activeStyle={{color: 'red'}}>Vendors</Link></a><span className="pipe-class">|</span>
                     <a><Link to={"/clients"} activeStyle={{color: 'red'}}>Clients</Link></a><span className="pipe-class">|</span>
+                    <hr/>
+
                 </div>
             </div>
             );

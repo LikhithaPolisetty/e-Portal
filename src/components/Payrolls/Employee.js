@@ -130,7 +130,7 @@ class Employee extends Component {
         });
 
         return(
-           <div>
+           <div className="loggedIn-page" style={{display:'none'}}>
                <div className="dropdown">
                     <hr/>
                    <button className="btn btn-danger dropdown-toggle btn-align" type="button" data-toggle="dropdown" style={{backgroundColor : 'red'}} >Get Details

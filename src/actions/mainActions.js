@@ -76,3 +76,19 @@ export function setDefaultClient(client) {
     };
 
 }
+
+
+export function deleteClient(index) {
+    return {
+        type: "DELETE_CLIENT",
+        payload: index
+    };
+
+}
+
+export function deleteVendor(index) {
+    return {
+        type: "DELETE_VENDOR",
+        payload: index
+    };
+}

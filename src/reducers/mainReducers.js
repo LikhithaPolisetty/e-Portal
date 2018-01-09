@@ -70,6 +70,22 @@ const mainReducer = (state = {
                 defaultClient: action.payload
             };
             break;
+        case "DELETE_CLIENT":
+            var updatedClients = state.tabnerClients.slice();
+            updatedClients.splice(action.payload, 1);
+            state = {
+                ...state,
+                tabnerClients : updatedClients
+            };
+            break;
+        case "DELETE_VENDOR":
+            var updatedVendors = state.tabnerVendors.slice();
+            updatedVendors.splice(action.payload, 1);
+            state = {
+                ...state,
+                tabnerVendors: updatedVendors
+            };
+            break;
     }
     return state;
 };
