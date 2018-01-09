@@ -50,7 +50,7 @@ class Clients extends Component {
                 headers: {'tabner_token': localStorage.getItem('tabner_token')}
             };
 
-            axios.get('http://localhost:8080/TabnerEmployeePayroll/tabnerclients', config)
+            axios.get('http://localhost:8090/TabnerEmployeePayroll/tabnerclients', config)
                 .then((response) => {
                     this.props.setTabnerClients(response.data.response);
                     console.log(response);
@@ -65,8 +65,6 @@ class Clients extends Component {
         }
 
     }
-
-
 
     handleCreateClient(event){
         event.preventDefault();

@@ -30,7 +30,7 @@ class Totp extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        axios.post('http://localhost:8080/TabnerEmployeePayroll/totp', {
+        axios.post('http://'+localStorage.getItem('your_ip')+':8090/TabnerEmployeePayroll/totp', {
             username: this.props.main.userName,
             password: this.state.password
         })
@@ -49,7 +49,7 @@ class Totp extends Component {
             localStorage.setItem('tabner_token' ,response.data.token );
             console.log(localStorage.getItem('tabner_token'));
             console.log('is logged value is:' + this.props.main.isLogged);
-            browserHistory.push("/loggedIn") ;
+            browserHistory.push("/employees") ;
         } else {
             this.setState({
                 password: '',

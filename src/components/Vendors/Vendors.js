@@ -46,7 +46,7 @@ class Vendors extends Component {
             var config = {
                 headers: {'tabner_token': localStorage.getItem('tabner_token')}
             };
-            axios.get('http://localhost:8080/TabnerEmployeePayroll/tabnervendors', config)
+            axios.get('http://localhost:8090/TabnerEmployeePayroll/tabnervendors', config)
                 .then((response) => {
                     this.props.setTabnerVendors(response.data.response);
                     console.log(response);
@@ -68,7 +68,7 @@ class Vendors extends Component {
         var config = {
             headers: {'tabner_token': localStorage.getItem('tabner_token')}
         };
-        axios.post('http://'+localStorage.getItem('your_ip')+':8090/TabnerEmployeePayroll/newvendor', {
+        axios.post('http://localhost:8090/TabnerEmployeePayroll/newvendor', {
             id_number: this.state.id_number,
             name : this.state.name,
             reg_state : this.state.reg_state,
@@ -108,7 +108,7 @@ class Vendors extends Component {
             var config = {
                 headers: {'tabner_token': localStorage.getItem('tabner_token')}
             };
-            axios.post('http://localhost:8080/TabnerEmployeePayroll/deletevendor', {
+            axios.post('http://localhost:8090/TabnerEmployeePayroll/deletevendor', {
                 id_number: this.props.main.tabnerVendors[index].id_number
             }, config)
                 .then((response) => this.ifGotResponseFromDeleteVendor(response, index))
@@ -177,7 +177,7 @@ class Vendors extends Component {
         });
 
         return (
-            <div className="container-fluid">
+            <div className="container">
 
                 <div className="search-div" style={{paddingLeft:'27px', paddingRight: '31px', marginLeft:'0px', marginRight: '0px'}}>
                     <div className="col-xs-1" style={{paddingLeft:'0px'}}>
@@ -190,7 +190,7 @@ class Vendors extends Component {
 
                 </div>
 
-                <div className="container">
+                <div>
 
                     <div className="table-div">
                         <div className="row justify-content-center">
@@ -227,7 +227,7 @@ class Vendors extends Component {
                                 <div className="modal-header">
                                     <div className="row">
                                         <div className="col-xs-11">
-                                            <h4 className="modal-title forms-text">ADD NEW Vendor</h4>
+                                            <h4 className="modal-title forms-text">ADD NEW VENDOR</h4>
                                         </div>
                                         <div className="col-xs-1">
                                             <a data-dismiss="modal" style={{cursor : 'pointer'}}><span className="glyphicon glyphicon-remove"></span></a

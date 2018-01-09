@@ -28,7 +28,7 @@ require("primereact/resources/primereact.min.css");
                 headers: {'tabner_token': localStorage.getItem('tabner_token')}
             };
 
-            axios.get('http://localhost:8080/TabnerEmployeePayroll//employeerates/BILL', config)
+            axios.get('http://'+localStorage.getItem('your_ip')+':8090/TabnerEmployeePayroll//employeerates/BILL', config)
                 .then((response) => {
                     console.log('PRINTING billDATERS' + response);
                     console.log(response);
