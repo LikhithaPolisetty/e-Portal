@@ -25,10 +25,10 @@ require("primereact/resources/primereact.min.css");
             browserHistory.push("/home");
         } else {
             var config = {
-                headers: {'tabner_token': localStorage.getItem('tabner_token')}
+                headers: {'Authorization': localStorage.getItem('tabner_token')}
             };
 
-            axios.get('http://'+localStorage.getItem('your_ip')+':8090/TabnerEmployeePayroll//employeerates/BILL', config)
+            axios.get('http://'+localStorage.getItem('your_ip')+':8080/employeerates/BILL', config)
                 .then((response) => {
                     console.log('PRINTING billDATERS' + response);
                     console.log(response);

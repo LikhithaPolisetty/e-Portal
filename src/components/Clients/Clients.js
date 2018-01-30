@@ -47,10 +47,10 @@ class Clients extends Component {
             browserHistory.push("/home");
         } else {
             var config = {
-                headers: {'tabner_token': localStorage.getItem('tabner_token')}
+                headers: {'Authorization': localStorage.getItem('tabner_token')}
             };
 
-            axios.get('http://'+localStorage.getItem('your_ip')+':8090/TabnerEmployeePayroll/tabnerclients', config)
+            axios.get('http://'+localStorage.getItem('your_ip')+':8090/tabnerclients', config)
                 .then((response) => {
                     this.props.setTabnerClients(response.data.response);
                     console.log(response);
@@ -73,9 +73,9 @@ class Clients extends Component {
         console.log(this.state.idclient + this.state.clientname + this.state.phone + this.state.email + this.state.location + this.state.domain);
 
         var config = {
-            headers: {'tabner_token': localStorage.getItem('tabner_token')}
+            headers: {'Authorization': localStorage.getItem('tabner_token')}
         };
-        axios.post('http://'+localStorage.getItem('your_ip')+':8090/TabnerEmployeePayroll/newclient', {
+        axios.post('http://'+localStorage.getItem('your_ip')+':8090/newclient', {
             idclient: this.state.idclient,
             clientname : this.state.clientname,
             phone : this.state.phone,
@@ -116,9 +116,9 @@ class Clients extends Component {
         var alert_msg = window.confirm("Are you sure you want to delete?");
         if(alert_msg) {
             var config = {
-                headers: {'tabner_token': localStorage.getItem('tabner_token')}
+                headers: {'Authorization': localStorage.getItem('tabner_token')}
             };
-            axios.post('http://'+localStorage.getItem('your_ip')+':8090/TabnerEmployeePayroll/deleteclient', {
+            axios.post('http://'+localStorage.getItem('your_ip')+':8090/deleteclient', {
                 idclient: this.props.main.tabnerClients[index].idclient
             }, config)
                 .then((response) => this.ifGotResponseFromDeleteClient(response, index))
@@ -190,23 +190,16 @@ class Clients extends Component {
 
         return (
             <div className="container">
-
-                <div className="search-div" style={{paddingLeft:'27px', paddingRight: '31px', marginLeft:'0px', marginRight: '0px'}}>
-                    <div className="col-xs-1" style={{paddingLeft:'0px'}}>
-                        <button className="btn btn-primary btn-align" type="button" data-toggle="modal" data-target="#newClient" data-backdrop="false">Add Client</button>
-                    </div>
-                    <div className="col-xs-3" style={{float:'right'}}>
-                        <input type="text" className="form-control"  placeholder="SEARCH FOR CLIENTS" id="cli" name="cli"
-                               onChange={this.handleInputChange}/>
-                    </div>
-
-                </div>
-
-                <div>
-
                     <div className="table-div">
                         <div className="row justify-content-center">
                             <div className="col align-self-center">
+                                <div className="add-btn" style={{float: 'left'}}>
+                                    <button className="btn btn-primary" type="button" data-toggle="modal" data-target="#newClient" data-backdrop="true">Add Client</button>
+                                </div>
+                                <div className="col-xs-3" style={{float:'right', paddingRight: '0px'}}>
+                                    <input type="text" className="form-control" placeholder="Search for..." id="cli" name="cli"
+                                           onChange={this.handleInputChange}/>
+                                </div>
                                 <table class="table table-striped table-bordered">
                                     <thead>
                                     <tr>
@@ -216,6 +209,7 @@ class Clients extends Component {
                                         <th>Email</th>
                                         <th>Location</th>
                                         <th>Domain</th>
+                                        <th></th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -233,7 +227,7 @@ class Clients extends Component {
                     <div>
                     </div>
 
-                    <div className="modal fade" id="newClient" role="dialog">
+                    <div className="modal fade" id="newClient" tabindex="-1" role="dialog" aria-hidden="true">
                         <div className="modal-dialog">
                             <div className="modal-content"  style={{backgroundColor: '#2d60a3'}}>
                                 <div className="modal-header">
@@ -251,28 +245,32 @@ class Clients extends Component {
                                         <div className="form-group">
                                             <label htmlFor="idclient">Client ID</label>
                                             <input type="text" className="form-control" placeholder="CLIENT ID" id= "idclient" name="idclient"
-                                                   onChange={this.handleInputChange}/>
+                                                   onChange={this.handleInputChange} required/>
                                         </div>
                                         <div className="form-group">
                                             <label htmlFor="clientname">Client Name</label>
                                             <input type="text" className="form-control" placeholder="CLIENT NAME" id= "clientname" name="clientname"
-                                                   onChange={this.handleInputChange}/>
+                                                   onChange={this.handleInputChange} required/>
                                         </div>
                                         <div className="form-group">
                                             <label htmlFor="phone">Phone</label>
-                                            <input type="text" placeholder="PHONE" className="form-control" id="phone" name="phone" onChange={this.handleInputChange}/>
+                                            <input type="text" placeholder="PHONE" className="form-control" id="phone" name="phone"
+                                                   onChange={this.handleInputChange} required/>
                                         </div>
                                         <div className="form-group">
                                             <label htmlFor="email">Email</label>
-                                            <input type="email" placeholder="EMAIL" className="form-control" id="email" name="email" onChange={this.handleInputChange}/>
+                                            <input type="email" placeholder="EMAIL" className="form-control" id="email" name="email"
+                                                   onChange={this.handleInputChange} required/>
                                         </div>
                                         <div className="form-group">
                                             <label htmlFor="location">Location</label>
-                                            <input type="text" placeholder="LOCATION" className="form-control" id="location" name="location" onChange={this.handleInputChange}/>
+                                            <input type="text" placeholder="LOCATION" className="form-control" id="location" name="location"
+                                                   onChange={this.handleInputChange} required/>
                                         </div>
                                         <div className="form-group">
                                             <label htmlFor="domain">Domain</label>
-                                            <input type="text" placeholder="DOMAIN" className="form-control" id="domain" name="domain" onChange={this.handleInputChange}/>
+                                            <input type="text" placeholder="DOMAIN" className="form-control" id="domain" name="domain"
+                                                   onChange={this.handleInputChange} required/>
                                         </div>
                                         <div className = "row">
                                             <div className="col-xs-3"></div>
@@ -294,28 +292,6 @@ class Clients extends Component {
 
                         </div>
                     </div>
-
-                    <div class="modal fade" id="promptDelete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Confirm Delete</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    Are you sure you want to delete the selected Client?
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary" >Confirm Delete</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
             </div>
 
         );

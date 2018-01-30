@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Link, browserHistory} from "react-router";
 import  axios  from 'axios';
-import {login, logout, setUser,setCheck} from '../../actions/mainActions';
+import {login, logout,beforeLogin, setUser,setCheck} from '../../actions/mainActions';
 import {connect} from "react-redux";
 
 
@@ -26,6 +26,7 @@ class Header extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            emp_id: '',
             email: '',
             password: '',
             messageForSignIn: '',
@@ -52,7 +53,7 @@ class Header extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        axios.post('http://'+localStorage.getItem('your_ip')+':8090/TabnerEmployeePayroll/login', {
+        axios.post('http://'+localStorage.getItem('your_ip')+':8090/login', {
             username: this.state.email,
             password: this.state.password
         })
@@ -68,10 +69,13 @@ class Header extends Component {
             localStorage.setItem('tabner_token' ,response.data.token )
             console.log("token check");
             console.log(response);
+            this.props.beforeLogin();
             this.props.setUser(this.state.email);
             this.props.setCheck('login');
             browserHistory.push('/home-single');
             browserHistory.push('/totp') ;
+
+
         } else {
             this.setState({
                 password: '',
@@ -83,9 +87,9 @@ class Header extends Component {
 
     onSignOut(){
         var config = {
-            headers: {'tabner_token': localStorage.getItem('tabner_token')}
+            headers: {'Authorization': localStorage.getItem('tabner_token')}
         };
-        axios.post('http://'+localStorage.getItem('your_ip')+':8090/TabnerEmployeePayroll/logout',{},config)
+        axios.post('http://'+localStorage.getItem('your_ip')+':8090/logout',{},config)
             .then((response) => this.ifGotResponseFromLogout(response))
             .catch(function (error) {
                 console.log(error);
@@ -108,7 +112,8 @@ class Header extends Component {
 
     handleSignUp(event){
         event.preventDefault();
-        axios.post('http://'+localStorage.getItem('your_ip')+':8090/TabnerEmployeePayroll/signup', {
+        axios.post('http://'+localStorage.getItem('your_ip')+':8090/signup', {
+            emp_id: this.state.emp_id,
             username: this.state.email,
             password: this.state.password
         })
@@ -124,8 +129,9 @@ class Header extends Component {
             localStorage.setItem('tabner_secret', response.data.secret);
             localStorage.setItem('tabner_token' ,response.data.token );
             console.log('reaching here barcode')
-
             this.props.setCheck('logging out');
+            this.props.beforeLogin();
+            this.props.setUser(this.state.email);
             browserHistory.push('/home-single');
             browserHistory.push('/barcode');
         } else {
@@ -151,23 +157,35 @@ class Header extends Component {
                     <nav className="navbar-xs" style={styles}>
                         <div className="container-fluid">
                             <div className="navbar-header">
-                                <a className="navbar-brand" href="#" style={text}>Tabner portal</a>
+                                <a className="navbar-brand" href="#" style={text}>e-Portal</a>
                             </div>
-                            <ul className="nav navbar-nav navbar-right">
-                                <li className="test"><a onClick={this.onSignOut.bind(this)} style={text}><span className="glyphicon glyphicon-log-in"></span> Sign Out</a></li>
-                            </ul>
-                        </div>
-                    </nav>
-                </div>
+                            <ul className="nav navbar-nav">
+                                <li className="test" ><Link to={"/employees/active"} style={text} activeStyle={{backgroundColor: '#2d60a3'}}>Employees</Link></li>
+                                <li className="test" ><Link to={"/vendors"} style={text} activeStyle={{backgroundColor: '#2d60a3'}}>Vendors</Link></li>
+                                {/*<li className="test" ><Link to={"/clients"} style={text} activeStyle={{backgroundColor: '#2d60a3'}}>Clients</Link></li>*/}
+                                {/*
                 <div className="test-nav">
                     <a ><Link to={"/home"} activeStyle={{color: 'red'}}>Home</Link></a><span className="pipe-class">|</span>
+                    <a><Link to={"/employees"} activeStyle={{color: 'red'}}>Employees</Link></a><span className="pipe-class">|</span>
                     <a style={{display: 'none'}}><Link to={"/loggedIn"} activeStyle={{color: 'red'}}>Payrolls</Link></a><span style={{display: 'none'}} className="pipe-class">|</span>
                     <a style={{display: 'none'}}><Link to={"/rates"} activeStyle={{color: 'red'}}>Rates</Link></a><span style={{display: 'none'}} className="pipe-class">|</span>
                     <a><Link to={"/employees"} activeStyle={{color: 'red'}}>Employees</Link></a><span className="pipe-class">|</span>
                     <a><Link to={"/vendors"} activeStyle={{color: 'red'}}>Vendors</Link></a><span className="pipe-class">|</span>
                     <a><Link to={"/clients"} activeStyle={{color: 'red'}}>Clients</Link></a><span className="pipe-class">|</span>
+                    <a><Link to={"/invoices"} activeStyle={{color: 'red'}}>Invoices</Link></a><span className="pipe-class">|</span>
+                    <a><Link to={"/newfile"} activeStyle={{color: 'red'}}>File Upload</Link></a><span className="pipe-class">|</span>
                     <a><Link to={"/rates"} activeStyle={{color: 'red'}}>Rates</Link></a><span className="pipe-class">|</span>
+                    <a><Link to={"/address"} activeStyle={{color: 'red'}}>Address</Link></a><span className="pipe-class">|</span>
+
                     <hr/>
+                </div>
+*/}
+                            </ul>
+                            <ul className="nav navbar-nav navbar-right">
+                                <li className="test"><a onClick={this.onSignOut.bind(this)} style={text}><span className="glyphicon glyphicon-log-in"></span> Sign Out</a></li>
+                            </ul>
+                        </div>
+                    </nav>
                 </div>
             </div>
             );
@@ -178,7 +196,7 @@ class Header extends Component {
                 <nav className="navbar-xs" style={styles}>
                     <div className="container-fluid">
                         <div className="navbar-header">
-                            <a className="navbar-brand" href="#" style={text}> Tabner Portal</a>
+                            <a className="navbar-brand" href="#" style={text}> e-Portal</a>
                         </div>
 
                         <ul className="nav navbar-nav navbar-right">
@@ -191,8 +209,8 @@ class Header extends Component {
                             <li className="dropdown test ">
                                 <a href="#" className="dropdown-toggle" data-toggle="dropdown" style={text}><span
                                         className="glyphicon glyphicon-user"> </span> Sign Up</a>
-                                    <ul id="login-dp" className="dropdown-menu">
-                                    <li>
+                                    <ul id="signup-dp" className="dropdown-menu">
+                                    <li className="signup-modal" id = "signup">
                                         <div className="row">
                                             <div className="col-md-12 form-form">
                                                 <div className="form-title">
@@ -200,6 +218,11 @@ class Header extends Component {
                                                     <hr/>
                                                 </div>
                                                 <form onSubmit={this.handleSignUp.bind(this)}>
+                                                    <div className="form-group">
+                                                        <label htmlFor="email">Employee ID</label>
+                                                        <input type="text" className="form-control" placeholder="EMPLOYEE ID" id="emp_id" name="emp_id"
+                                                               onChange={this.handleInputChange}/>
+                                                    </div>
                                                     <div className="form-group">
                                                         <label htmlFor="email">Email Address:</label>
                                                         <input type="email" className="form-control" id="email" name="email"
@@ -276,6 +299,7 @@ class Header extends Component {
 
                     {/* model box for sign in*/}
 
+{/*
                     <div className="modal fade" id="signIn" role="dialog">
                         <div className="modal-dialog">
 
@@ -325,12 +349,12 @@ class Header extends Component {
 
                         </div>
                     </div>
+*/}
 
                     {/* model box for sign up*/}
+{/*
                     <div className="modal fade" id="signUp" role="dialog">
                         <div className="modal-dialog">
-
-
                             <div className="modal-content"  style={{backgroundColor: '#2d60a3'}}>
                                 <div className="modal-header">
                                     <div className="row">
@@ -338,12 +362,17 @@ class Header extends Component {
                                             <h4 className="modal-title forms-text">CREATE ACCOUNT</h4>
                                         </div>
                                         <div className="col-xs-1">
-                                            <a data-dismiss="modal" style={{cursor : 'pointer'}}><span className="glyphicon glyphicon-remove"></span></a
-                                            ></div>
+                                            <a data-dismiss="modal" style={{cursor : 'pointer'}}><span className="glyphicon glyphicon-remove"></span></a>
+                                            </div>
                                     </div>
                                 </div>
                                 <div className="modal-body">
                                     <form onSubmit={this.handleSignUp.bind(this)}>
+                                        <div className="form-group">
+                                            <label htmlFor="email">Employee ID</label>
+                                            <input type="emp_id" className="form-control" placeholder="EMPLOYEE ID" id="emp_id" name="emp_id"
+                                                    onChange={this.handleInputChange}/>
+                                        </div>
                                         <div className="form-group">
                                             <label htmlFor="email">Email Address:</label>
                                             <input type="email" className="form-control" placeholder="EMAIL ADDRESS" id="email" name="email"
@@ -374,6 +403,7 @@ class Header extends Component {
 
                         </div>
                     </div>
+*/}
 
                 </nav>
             );
@@ -395,6 +425,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         logout: () => {
             dispatch(logout());
+        },
+        beforeLogin: () => {
+            dispatch(beforeLogin());
         },
         setUser: (name) => {
             dispatch(setUser(name));

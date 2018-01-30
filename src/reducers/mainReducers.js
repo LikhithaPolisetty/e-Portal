@@ -1,12 +1,18 @@
 const mainReducer = (state = {
     isLogged : 'false',
+    beforeLogin: 'false',
     userName : '',
     check: '',
+    userRole: '',
     defaultEmployee: '',
     tabnerEmployees: [],
     tabnerVendors: [],
     tabnerClients: [],
-    employeeRates: []
+    employeeRates: [],
+    employeeAddress: [],
+    vendorEmployees: [],
+    vendorInvoices: [],
+    vendorAddress:[]
 }, action) => {
     switch (action.type) {
         case "LOGIN":
@@ -21,6 +27,12 @@ const mainReducer = (state = {
                 isLogged: action.payload
             };
             break;
+        case "BEFORE_LOGIN":
+            state = {
+                ...state,
+                beforeLogin: action.payload
+            };
+            break;
         case "USER":
             state = {
                 ...state,
@@ -31,6 +43,12 @@ const mainReducer = (state = {
             state = {
                 ...state,
                 check: action.payload
+            };
+            break;
+        case "USER_ROLE":
+            state = {
+                ...state,
+                userRole: action.payload
             };
             break;
         case "TABNER_EMPLOYEES":
@@ -77,6 +95,30 @@ const mainReducer = (state = {
             state = {
                 ...state,
                 employeeRates: action.payload
+            };
+            break;
+        case "EMPLOYEE_ADDRESS":
+            state = {
+                ...state,
+                employeeAddress: action.payload
+            };
+            break;
+        case "VENDOR_EMPLOYEES":
+            state = {
+                ...state,
+                vendorEmployees: action.payload
+            };
+            break;
+        case "VENDOR_INVOICES":
+            state = {
+                ...state,
+                vendorInvoices: action.payload
+            };
+            break;
+        case "VENDOR_ADDRESS":
+            state = {
+                ...state,
+                vendorAddress: action.payload
             };
             break;
     }

@@ -35,10 +35,10 @@ class Employee extends Component {
 
     componentDidMount(){
         var config = {
-            headers: {'tabner_token': localStorage.getItem('tabner_token')}
+            headers: {'Authorization': localStorage.getItem('tabner_token')}
         };
 
-        axios.get('http://'+localStorage.getItem('your_ip')+':8090/TabnerEmployeePayroll/paydates', config)
+        axios.get('http://'+localStorage.getItem('your_ip')+':8090/paydates', config)
             .then((response) => {
             console.log(response)
             this.setState({
@@ -65,9 +65,9 @@ class Employee extends Component {
         event.preventDefault();
 
         var config = {
-            headers: {'tabner_token': localStorage.getItem('tabner_token')}
+            headers: {'Authorization': localStorage.getItem('tabner_token')}
         };
-        axios.post('http://'+localStorage.getItem('your_ip')+':8090/TabnerEmployeePayroll/newuser', {
+        axios.post('http://'+localStorage.getItem('your_ip')+':8090/newuser', {
             paycorId : this.state.paycorid,
             firstName : this.state.firstname,
             lastName: this.state.lastname,
@@ -103,9 +103,9 @@ class Employee extends Component {
 
     onPayDateSelect(index) {
         var config = {
-            headers: {'tabner_token': localStorage.getItem('tabner_token')}
+            headers: {'Authorization': localStorage.getItem('tabner_token')}
         };
-        axios.post('http://'+localStorage.getItem('your_ip')+':8090/TabnerEmployeePayroll/employees', {
+        axios.post('http://'+localStorage.getItem('your_ip')+':8090/employees', {
             date : this.state.paydates[index]
         }, config)
             .then((response) => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Component} from 'react';
 import { browserHistory} from "react-router";
-import {login, logout} from '../../actions/mainActions';
+import {login, logout, setUserRole} from '../../actions/mainActions';
 import {connect} from "react-redux";
 import  axios  from 'axios';
 
@@ -28,9 +28,15 @@ class Totp extends Component {
         });
     }
 
+    componentWillMount() {
+        if (this.props.main.beforeLogin == 'false') {
+            browserHistory.push("/home");
+        }
+    }
+
     handleSubmit(event) {
         event.preventDefault();
-        axios.post('http://'+localStorage.getItem('your_ip')+':8090/TabnerEmployeePayroll/totp', {
+        axios.post('http://'+localStorage.getItem('your_ip')+':8090/totp', {
             username: this.props.main.userName,
             password: this.state.password
         })
@@ -40,7 +46,7 @@ class Totp extends Component {
             });
     }
     ifGotResponseFromSubmit(response) {
-        console.log("are we getting response treue??");
+        console.log("are we getting response true??");
         console.log(response);
         if (response.data.response === true) {
             console.log("token check");
@@ -49,7 +55,20 @@ class Totp extends Component {
             localStorage.setItem('tabner_token' ,response.data.token );
             console.log(localStorage.getItem('tabner_token'));
             console.log('is logged value is:' + this.props.main.isLogged);
-            browserHistory.push("/employees") ;
+            var config = {
+                headers: {'Authorization': localStorage.getItem('tabner_token')}
+            };
+            axios.post('http://'+localStorage.getItem('your_ip')+':8090/userrole',{
+                username: this.props.main.userName
+            }, config)
+                .then((response) => {
+                    this.props.setUserRole(response.data.response);
+                    console.log(response.data.response);
+                    console.log('dataaaa fromm redux');
+                    console.log(".....totp........"+this.props.main.userRole);
+                    browserHistory.push("/employees/active") ;
+                })
+
         } else {
             this.setState({
                 password: '',
@@ -97,6 +116,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         logout: () => {
             dispatch(logout());
+        },
+        setUserRole: (role) => {
+            dispatch(setUserRole(role));
         }
     };
 };

@@ -24,10 +24,10 @@ require("primereact/resources/primereact.min.css");
             browserHistory.push("/home");
         } else {
             var config = {
-                headers: {'tabner_token': localStorage.getItem('tabner_token')}
+                headers: {'Authorization': localStorage.getItem('tabner_token')}
             };
 
-            axios.get('http://'+localStorage.getItem('your_ip')+':8090/TabnerEmployeePayroll//employeerates/PAY', config)
+            axios.get('http://'+localStorage.getItem('your_ip')+':8080/employeerates/PAY', config)
                 .then((response) => {
                     console.log('PRINTING PAYDATERS' + response);
                     console.log(response);

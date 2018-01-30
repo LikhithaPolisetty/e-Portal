@@ -21,10 +21,10 @@ class DefaultEmployee extends Component {
             browserHistory.push("/home");
         } else {
             var config = {
-                headers: {'tabner_token': localStorage.getItem('tabner_token')}
+                headers: {'Authorization': localStorage.getItem('tabner_token')}
             };
-
-            axios.post('http://'+localStorage.getItem('your_ip')+':8090/TabnerEmployeePayroll/defaulttabneremployee', {
+            console.log("user name......" + this.props.main.userName);
+            axios.post('http://'+localStorage.getItem('your_ip')+':8090/defaulttabneremployee', {
                 username : this.props.main.userName
             }, config)
                 .then((response) => {
@@ -44,16 +44,16 @@ class DefaultEmployee extends Component {
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Personal Details</a>
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Personal Information</a>
                         </h4>
                     </div>
                     <div id="collapse1" class="panel-collapse collapse">
                         <div class="panel-body">
-                            <h4>Employee Id: {this.props.main.defaultEmployee.emp_id}</h4>
-                            <h4>First Name: {this.props.main.defaultEmployee.first_name}</h4>
-                            <h4>Last Name: {this.props.main.defaultEmployee.last_name}</h4>
-                            <h4>Email: {this.props.main.defaultEmployee.email_id}</h4>
-                            <h4>Mobile: {this.props.main.defaultEmployee.mobile_num}</h4>
+                            <h5 className="col-md-9">Employee Id: {this.props.main.defaultEmployee.emp_id}</h5>
+                            <h5 className="col-md-5">First Name: {this.props.main.defaultEmployee.first_name}</h5>
+                            <h5 className="col-md-5">Last Name: {this.props.main.defaultEmployee.last_name}</h5>
+                            <h5 className="col-md-5">Email: {this.props.main.defaultEmployee.email_id}</h5>
+                            <h5 className="col-md-5">Mobile: {this.props.main.defaultEmployee.mobile_num}</h5>
                         </div>
                     </div>
                 </div>
@@ -65,8 +65,53 @@ class DefaultEmployee extends Component {
                     </div>
                     <div id="collapse2" class="panel-collapse collapse">
                         <div class="panel-body">
-                            <h4>Passport: {this.props.main.defaultEmployee.passport}</h4>
-                            <h4>Visa: {this.props.main.defaultEmployee.visa}</h4>
+                            <div class="panel-body">
+                            <div class="panel-group" id="accordion11">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion11" href="#collapse11">Passport Details</a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapse11" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <h5 className="col-md-5">Passport Number: {this.props.main.defaultEmployee.emp_id}</h5>
+                                            <h5 className="col-md-5">Issued Country: {this.props.main.defaultEmployee.first_name}</h5>
+                                            <h5 className="col-md-5">Issued Date: {this.props.main.defaultEmployee.last_name}</h5>
+                                            <h5 className="col-md-5">Expiration Date: {this.props.main.defaultEmployee.email_id}</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion11" href="#collapse12">Visa Details</a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapse12" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <h5 className="col-md-5">Visa Number: {this.props.main.defaultEmployee.passport}</h5>
+                                            <h5 className="col-md-5">Visa Type: {this.props.main.defaultEmployee.visa}</h5>
+                                            <h5 className="col-md-5">Issued Date: {this.props.main.defaultEmployee.last_name}</h5>
+                                            <h5 className="col-md-5">Expiration Date: {this.props.main.defaultEmployee.email_id}</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion11" href="#collapse13">I94 Details</a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapse13" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <h5 className="col-md-5">I94 Number: {this.props.main.defaultEmployee.education}</h5>
+                                            <h5 className="col-md-5">Last Arrived Date: {this.props.main.defaultEmployee.experience}</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -78,9 +123,9 @@ class DefaultEmployee extends Component {
                     </div>
                     <div id="collapse3" class="panel-collapse collapse">
                         <div class="panel-body">
-                            <h4>Education: {this.props.main.defaultEmployee.education}</h4>
-                            <h4>Experience: {this.props.main.defaultEmployee.experience}</h4>
-                            <h4>Skills: {this.props.main.defaultEmployee.skills}</h4>
+                            <h5 className="col-md-5">Education: {this.props.main.defaultEmployee.education}</h5>
+                            <h5 className="col-md-5">Experience: {this.props.main.defaultEmployee.experience}</h5>
+                            <h5 className="col-md-5">Skills: {this.props.main.defaultEmployee.skills}</h5>
                         </div>
                     </div>
                 </div>
@@ -92,7 +137,7 @@ class DefaultEmployee extends Component {
                     </div>
                     <div id="collapse4" class="panel-collapse collapse">
                         <div class="panel-body">
-                            <h4>Address: {this.props.main.defaultEmployee.address}</h4>
+                            <h5 className="col-md-5">Address: {this.props.main.defaultEmployee.address}</h5>
                         </div>
                     </div>
                 </div>

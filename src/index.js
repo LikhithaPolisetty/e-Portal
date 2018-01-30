@@ -12,11 +12,15 @@ import store from "./store";
 import {Provider} from "react-redux";
 import Barcode from "./components/Otp/Barcode";
 import Totp from "./components/Otp/Totp";
-import TabnerEmployees from "./components/Employees/TabnerEmployees";
-import DefaultEmployee from "./components/Employees/DefaultEmployee";
+import Employees from "./components/Employees/Employees";
+import ActiveEmployees from "./components/Employees/ActiveEmployees";
+import InactiveEmployees from "./components/Employees/InactiveEmployees";
 import Vendors from "./components/Vendors/Vendors";
 import Clients from "./components/Clients/Clients";
-
+import EmployeeAddress from "./components/Address/EmployeeAddress";
+import SimpleReactFileUpload from "./components/FileUpload/SimpleReactFileUpload";
+import Invoices from "./components/Invoices/Invoices";
+import DefaultEmployee from "./components/Employees/DefaultEmployee";
 require("./stylesheets/css/main.css");
 
 
@@ -34,12 +38,18 @@ class Main extends React.Component {
                        {/* <Route path={"payrates"} component={PayRates}  />
                         <Route path={"billrates"} component={BillRates} />*/}
                     </Route>
-                    <Route path={"employees"} component={TabnerEmployees} >
-                        <IndexRoute component={DefaultEmployee}/>
+                    <Route path={"employees"} component={Employees}>
+                        <Route path={"active"} component={ActiveEmployees}>
+                            <IndexRoute component={DefaultEmployee}/>
+                        </Route>
+                        <Route path={"inactive"} component={InactiveEmployees} />
                     </Route>
                     <Route path={"vendors"} component={Vendors} />
                     <Route path={"clients"} component={Clients} />
                     <Route path={"rates"} component={Rates}/>
+                    <Route path={"address"} component={EmployeeAddress}/>
+                    <Route path={"newfile"} component={SimpleReactFileUpload}/>
+                    <Route path={"invoices"} component={Invoices}/>
 
                 </Route>
                 <Route path={"home-single"} component={Home}/>

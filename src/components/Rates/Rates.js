@@ -36,10 +36,10 @@ class Rates extends Component {
             browserHistory.push("/home");
         } else {
             var config = {
-                headers: {'tabner_token': localStorage.getItem('tabner_token')}
+                headers: {'Authorization': localStorage.getItem('tabner_token')}
             };
 
-            axios.get('http://'+localStorage.getItem('your_ip')+':8090/TabnerEmployeePayroll/employeerates', config)
+            axios.get('http://'+localStorage.getItem('your_ip')+':8080/employeerates', config)
                 .then((response) => {
                     this.props.setEmployeeRates(response.data.response);
                     console.log(response);
@@ -103,23 +103,16 @@ class Rates extends Component {
 
         return (
             <div className="container">
-
-                <div className="search-div" style={{paddingLeft:'27px', paddingRight: '31px', marginLeft:'0px', marginRight: '0px'}}>
-                    <div className="col-xs-1" style={{paddingLeft:'0px'}}>
-                        <button className="btn btn-primary btn-align" type="button" data-toggle="modal" data-backdrop="false">Add</button>
-                    </div>
-                    <div className="col-xs-3" style={{float:'right'}}>
-                        <input type="text" className="form-control"  placeholder="Search for..." id="rates" name="rates"
-                               onChange={this.handleInputChange}/>
-                    </div>
-
-                </div>
-
-                <div>
-
                     <div className="table-div">
                         <div className="row justify-content-center">
                             <div className="col align-self-center">
+                                <div className="add-btn" style={{float: 'left'}}>
+                                    <button className="btn btn-primary" type="button" data-toggle="modal" data-backdrop="true">Add</button>
+                                </div>
+                                <div className="col-xs-3" style={{float:'right', paddingRight: '0px'}}>
+                                    <input type="text" className="form-control"  placeholder="Search for..." id="rates" name="rates"
+                                           onChange={this.handleInputChange}/>
+                                </div>
                                 <table class="table table-striped table-bordered">
                                     <thead>
                                     <tr>
@@ -131,6 +124,7 @@ class Rates extends Component {
                                         <th>End Date</th>
                                         <th>Pay Rate</th>
                                         <th>Bill Rate</th>
+                                        <th></th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -141,13 +135,8 @@ class Rates extends Component {
                             </div>
                         </div>
                     </div>
-
-
-
-
                     <div>
                     </div>
-                </div>
             </div>
 
         );
@@ -170,7 +159,7 @@ const mapDispatchToProps = (dispatch) => {
         },
         setEmployeeRates: (employee_rates) => {
             dispatch(setEmployeeRates(employee_rates));
-        },
+        }
 
     };
 };
